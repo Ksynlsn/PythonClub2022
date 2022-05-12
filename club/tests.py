@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 from .models import Meeting, MeetingMinutes, Resource, Event
 import datetime
+from .forms import MeetingForm, ResourceForm
 
 # Create your tests here.
 class MeetingTest(TestCase):
@@ -11,14 +12,13 @@ class MeetingTest(TestCase):
 
     def test_time(self):
          self.date=Meeting(meeting_date='03-22-22')
-         self.time=Meeting(meeting_time='2022-02-02 14:30:59')
+         self.time=Meeting(meeting_time='14:30:59')
 
     def test_typestring(self):
         self.assertEqual(str(self.title), 'Meeting Title')
 
     def test_tablename(self):
         self.assertEqual(str(Meeting._meta.db_table), 'meeting')
-
 
 
 class MeetingMinutesTest(TestCase):
@@ -32,7 +32,6 @@ class MeetingMinutesTest(TestCase):
 
     def test_tablename(self):
         self.assertEqual(str(MeetingMinutes._meta.db_table), 'meeting_minutes')
-
 
 
 class ResourceTest(TestCase):
@@ -59,3 +58,31 @@ class EventTest(TestCase):
      
     def test_tablename(self):
          self.assertEqual(str(Event._meta.db_table), 'event')
+
+# form tests
+class NewMeetingForm(TestCase):
+    def test_meetingForm(self):
+        data={
+            'meeting_title': 'title example', 
+            'meeting_date': '03-22-22', 
+            'meeting_time': '14:30:59', 
+            'meeting_location': 'example location', 
+            'adgenda': 'example adgenda'
+            }
+        form=MeetingForm (data)
+        self.assertTrue(form.is_valid)
+
+
+class NewResourceForm(TestCase):
+    def test_resourceForm(self):
+        data={
+          'resource_name': 'string',
+          'resource_type': 'a type here',
+          'url': 'http://myfakewebsite.neet',
+          'date_entered': '03-22-22',
+          'user': 'User1',
+          'description': 'description example'
+            }
+        form=ResourceForm (data)
+        self.assertTrue(form.is_valid)
+
