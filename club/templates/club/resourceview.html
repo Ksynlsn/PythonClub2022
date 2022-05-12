@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h2>Resources</h2>
+
+<p><a href="{% url 'resources' %}" class="btn"><i>back</i></a></p>
+
+    <dl>
+    <dt>Resource Name:</dt>
+    <dd>{{ resource.resource_name }}</dd>
+
+    <dt>Resource Type:</dt>
+    <dd>{{ resource.resource_type }}</dd>
+
+    <dt>Date Entered:</dt>
+    <dd>{{ resource.date_entered }}</dd>
+
+    <dt>Entered By:</dt>
+    <dd>{{ resource.user }}</dd>
+
+    <dt>Description:</dt>
+    <dd>{{ resource.description }}</dd>
+
+    <dt>Resource URL:</dt>
+    <dd>{{ resource.url }}</dd>
+    </dl>
+
+{% endblock %} 

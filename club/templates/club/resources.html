@@ -1,21 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h2>Resources</h2>
-        {% for r in resource_list %}
-            <dl>
-            <dt>Resource Name:</dt>
-            <dd>{{ r.resource_name }}</dd>
+<h2>Resources</h2>
 
-            <dt>Resource Type:</dt>
-            <dd>{{ r.resource_type }}</dd>
-
-            <dt>Description:</dt>
-            <dd>{{ r.description }}</dd>
-
-            <dt>Resource URL:</dt>
-            <dd>{{ r.url }}</dd>
-            </dl>
-        {% endfor %}
+<ul>
+    {% for r in resource_list %}
+        <li><a href="{% url 'resource_details' id=r.id %}">Resource: {{ r.resource_name }}</a></li>
+    {% endfor %}
+</ul> 
 
 {% endblock %}
